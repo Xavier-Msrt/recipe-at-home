@@ -10,7 +10,6 @@ export default function RecipeList({search}: {search: string}) {
         async function fetchRecipes() {
             const res = await fetch("/api/recipes");
             const data = await res.json();
-            console.log(data)
             setRecipes(data);
         }
         fetchRecipes()
@@ -21,8 +20,6 @@ export default function RecipeList({search}: {search: string}) {
 
         return recipe.title.toLowerCase().includes(search.toLowerCase());
     }
-
-
 
     return (
         <div className="flex flex-row justify-center flex-wrap gap-10 mt-4">
