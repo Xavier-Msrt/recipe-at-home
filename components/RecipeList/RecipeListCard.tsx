@@ -18,7 +18,7 @@ export default function RecipeListCard({title, description }: {title: string; de
             <div className="m-4">
                 <h3 className="text-2xl font-bold">{title}</h3>
                 <div className="flex justify-between gap-10 mt-4">
-                    <p className="w-3/4">{description}</p>
+                    <p className="w-3/4 break-all">{description}</p>
                     <button
                         onClick={handleButton}
                         className="w-1/4 m-4 bg-amber-500 px-4 py-2 rounded-xl text-white font-bold"
