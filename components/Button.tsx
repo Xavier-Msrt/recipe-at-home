@@ -3,7 +3,7 @@ export default function Button({text, handle}: {text: string, handle: () => void
         <button 
             type="button" 
             onClick={handle}
-            className="px-4 py-2 bg-blue-200 rounded-xl text-white"
+            className="px-4 py-2 bg-orange-200 rounded-xl text-white font-bold hover:bg-orange-400"
         >
             {text}
         </button>

@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Button from "../Button";
 
 export default function RecipeListCard({title, description }: {title: string; description: string}) {
     const handleButton = () => {
@@ -17,13 +18,15 @@ export default function RecipeListCard({title, description }: {title: string; de
             </div>
             <div className="m-4">
                 <h3 className="text-2xl font-bold">{title}</h3>
-                <div className="flex justify-between gap-10 mt-4">
-                    <p className="w-3/4 break-all">{description}</p>
-                    <button
-                        onClick={handleButton}
-                        className="w-1/4 m-4 bg-amber-500 px-4 py-2 rounded-xl text-white font-bold"
-                    >Voir
-                    </button>
+                <div className="mt-4">
+                    <p className="break-all">{description}</p>
+                    <div className="flex justify-end-safe mt-4">
+                        <Button
+                        handle={handleButton}
+                        text="Voir"
+                    />
+                    </div>
+                    
                 </div>
 
             </div>

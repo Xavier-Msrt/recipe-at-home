@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import NavLink from "@/components/NavLink";
-import Image from "next/image";
+import {Montserrat} from 'next/font/google';
+import Link from "next/link";
+const montserrat = Montserrat({
+  weight: "400",
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
   title: "Recipe @ Home",
@@ -14,15 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" className={montserrat.className}>
       <body>
-      <div className="flex justify-between mb-4 ">
-          <Image src="./next.svg"
-                 alt="receipe logo"
-                 width={100}
-                 height={100}
-                 className="m-4"
-          />
+      <div className="flex justify-between mb-4 bg-gray-50">
+        <Link href="/" className="text-3xl font-bold text-orange-400 p-6">Recipe @ Home</Link>
 
           <nav className="flex justify-center m-4">
               <NavLink url="/" pageName="Home"/>
@@ -32,7 +32,9 @@ export default function RootLayout({
       <div className="container mx-auto">
           {children}
       </div>
-
+      <footer className="flex justify-center bg-orange-200 mt-8 p-4">
+        <span className="text-white font-bold">Recipe @ Home - Open Source project to learn NextJS</span>
+      </footer>
       </body>
     </html>
   );
