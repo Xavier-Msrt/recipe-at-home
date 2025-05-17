@@ -26,7 +26,7 @@ export default function FormIngredient(
         const originalIngredients = [...ingredients];
         originalIngredients.push({
             name: "",
-            quantity: "",
+            quantity: 0,
             unit: ""
         })
         setIngredients(originalIngredients);
@@ -40,9 +40,9 @@ export default function FormIngredient(
                 {ingredients.map((v, index) => {
                     return (
                         <div className="flex gap-4" key={index}>
-                            <Input type="text" label="Nom" setValue={v => handleIngredientsChange(index, "name", v)} />
-                            <Input type="text" label="Quantité" setValue={v => handleIngredientsChange(index, "quantity", v)} />
-                            <Input type="text" label="Unité" setValue={v => handleIngredientsChange(index, "unit", v)} />
+                            <Input type="text" label="Nom" value={v.name} setValue={v => handleIngredientsChange(index, "name", v)} />
+                            <Input type="text" label="Quantité" value={v.quantity} setValue={v => handleIngredientsChange(index, "quantity", v)} />
+                            <Input type="text" label="Unité" value={v.unit} setValue={v => handleIngredientsChange(index, "unit", v)} />
                         </div>
                     )
                 })}

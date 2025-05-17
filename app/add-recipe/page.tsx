@@ -1,39 +1,34 @@
 "use client";
 import {Step} from "@/types/Step";
 import {useState} from "react";
-import Input from "@/components/Input";
 import { Ingredient } from "@/types/Ingredient";
 import Button from "@/components/Button";
-import { Recipe } from "@/types/Recipe";
+import { SendRecipe } from "@/types/Recipe";
 import FormDetailRecipe from "@/components/RecipeAdd/FormDetailRecipe";
 import FormIngredient from "@/components/RecipeAdd/FormIngredient";
 import FormStep from "@/components/RecipeAdd/FormSteps";
 
 export default function AddRecipePage() {
-    const [recipe, setRecipe] = useState<Recipe>({
-        id: 0,
-        image: "",
+    const [recipe, setRecipe] = useState<SendRecipe>({
         title: "",
         description: ""
     });
-    const [picture, setPicture] = useState();
+    const [picture, setPicture] = useState<File>();
 
     const [ingredients, setIngredients] = useState<Ingredient[]>([
         {
             name: "",
-            quantity: "",
+            quantity: 0,
             unit: ""
         }
     ]);
 
     const [steps, setSteps] = useState<Step[]>([
         {
-            id: 1,
+            num: 1,
             description: ""
         }
     ])
-
-
 
     const handleCreateBtn = async () => {
         const formData = new FormData();
@@ -70,7 +65,7 @@ export default function AddRecipePage() {
 
                         <div className="flex justify-center mt-4">
                             <Button 
-                            text="Creer la recette" 
+                            text="Créer la recette" 
                             handle={handleCreateBtn}/>
                         </div>
                  </form>

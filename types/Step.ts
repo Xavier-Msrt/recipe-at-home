@@ -1,4 +1,4 @@
 export type Step = {
-    id: number | undefined;
+    num: number;
     description: string;
 }

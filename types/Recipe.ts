@@ -1,6 +1,10 @@
-export type Recipe = {
-    id: number;
-    title: string;
-    description: string;
-    image: string;
+
+export interface SendRecipe {
+    title: string
+    description: string
+}
+
+export interface Recipe extends SendRecipe {
+    id: number
+    image: string
 }

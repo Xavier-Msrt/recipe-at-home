@@ -1,10 +1,11 @@
 import sql from "@/lib/data";
 import { Ingredient } from "@/types/Ingredient";
-import { Recipe } from "@/types/Recipe";
+import { SendRecipe, Recipe } from "@/types/Recipe";
 import { Step } from "@/types/Step";
 import fs from "fs";
 import path from "path";
 import { NextRequest, NextResponse } from "next/server";
+import Joi from "joi";
 
 const UPLOAD_DIR = path.resolve(process.env.ROOT_PATH ?? "", "public/uploads");
 
@@ -19,19 +20,27 @@ export async function POST(req: NextRequest, res: NextResponse) {
 	const body = Object.fromEntries(data);
 
 	const detail = checkDetail(body.recipe);
-	const ingredients = checkIngredients(body.ingredient);
-	const steps = checkSteps(body.step);
+	if(detail instanceof NextResponse) return detail;
+
+	const ingredients = checkIngredients(body.ingredients);
+	if(ingredients instanceof NextResponse) return ingredients;
+
+	const steps = checkSteps(body.steps);
+	if(steps instanceof NextResponse) return steps;
 
 
-	// file upload
 	const file = (body.picture as Blob) || null;
 	
 	if (!file) {
 		return NextResponse.json({ error: "Picture is required" }, { status: 400 });
 	}
-	savePicture(file, "123.jpg")
 
 	// DB SAVE
+	// await sql`INSERT INTO recipeathome.recipes ${sql(detail, 'title', 'description', 'image')}`;
+
+
+	// file upload
+	savePicture(file, "123.jpg") //TODO CHANGE THE name
 
 	return new Response();
 }
@@ -58,7 +67,7 @@ async function savePicture(file: Blob, fileName: string){
 }
 
 
-function checkDetail(recipe: FormDataEntryValue) {
+function checkDetail(recipe: FormDataEntryValue): SendRecipe | NextResponse {
 	if (!recipe) {
 		return NextResponse.json(
 			{ error: "recipe detail missing" },
@@ -67,9 +76,15 @@ function checkDetail(recipe: FormDataEntryValue) {
 	}
 
 	const recipeDetail: Recipe = JSON.parse(recipe.toString());
-	if (!recipeDetail.title || !recipeDetail.description) {
+	const schemaRecipeDetail = Joi.object({
+		title: Joi.string().alphanum().min(3).max(150).required(),
+		description: Joi.string().alphanum().min(10).max(700).required()
+	});
+
+	const { error } = schemaRecipeDetail.validate(recipeDetail);
+	if (error) {
 		return NextResponse.json(
-			{ error: "title or description missing" },
+			{ error: "title or description not correct" },
 			{ status: 400 }
 		);
 	}
@@ -77,17 +92,25 @@ function checkDetail(recipe: FormDataEntryValue) {
 	return recipeDetail;
 }
 
-function checkIngredients(ingredients: FormDataEntryValue) {
+function checkIngredients(ingredients: FormDataEntryValue): Ingredient[] | NextResponse {
 	if (!ingredients) {
-		return NextResponse.json({ error: "ingredients missing" }, { status: 400 });
+	 	return NextResponse.json({ error: "ingredients missing" }, { status: 400 });
 	}
+
+	const schemaIngredient = Joi.object({
+		name: Joi.string().alphanum().min(3).max(30).required(),
+		quantity: Joi.number().greater(0).less(100).required(),
+		unit: Joi.string().alphanum().min(1).max(10).allow(null, '')
+	})
 
 	const ingredientsObj: Ingredient[] = JSON.parse(ingredients.toString());
 	for (let i = 0; i < ingredientsObj.length; i++) {
 		const element: Ingredient = ingredientsObj[i];
-		if (!element.name || !element.quantity) {
+		
+		const { error } = schemaIngredient.validate(element);
+		if (error) {
 			return NextResponse.json(
-				{ error: "ingredient " + i + " missing name or quantity" },
+				{ error: "ingredient " + i + " not correct" },
 				{ status: 400 }
 			);
 		}
@@ -96,19 +119,26 @@ function checkIngredients(ingredients: FormDataEntryValue) {
 	return ingredientsObj;
 }
 
-function checkSteps(steps: FormDataEntryValue) {
+function checkSteps(steps: FormDataEntryValue): Step[] | NextResponse {
 	if (!steps) {
 		return NextResponse.json({ error: "steps missing" }, { status: 400 });
 	}
+	
+	const schemaStep = Joi.object({
+		num: Joi.number().required().greater(0).less(100).required(),
+		description: Joi.string().alphanum().min(5).max(700).required()
+	})
 
 	const stepsObj: Step[] = JSON.parse(steps.toString());
 	for (let i = 0; i < stepsObj.length; i++) {
 		const element: Step = stepsObj[i];
-		if (!element.description) {
+		const { error } = schemaStep.validate(element);
+		if (error) {
 			return NextResponse.json(
-				{ error: "steps " + i + " missing description" },
+				{ error: "steps " + i + " not correct" },
 				{ status: 400 }
 			);
+			
 		}
 	}
 

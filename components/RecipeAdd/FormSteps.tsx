@@ -23,9 +23,9 @@ export default function FormStep(
     };
 
     const handleAddStep = () => {
-        const originalSteps = steps;
+        const originalSteps = [...steps];
         originalSteps.push({
-            id: steps.length + 1,
+            num: steps.length + 1,
             description: ""
         });
         setSteps(originalSteps);
@@ -38,8 +38,8 @@ export default function FormStep(
             <div className="ml-4">
                 {steps.map((v, index) => {
                     return (
-                        <div key={v.id}>
-                            <Input type="text" label="Description" setValue={v => handleStepChange(index, "description", v)} />
+                        <div key={v.num}>
+                            <Input type="text" label="Description" value={v.description} setValue={v => handleStepChange(index, "description", v)} />
                         </div>
                     )
                 })}

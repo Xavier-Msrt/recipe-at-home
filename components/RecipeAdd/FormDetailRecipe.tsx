@@ -1,15 +1,15 @@
-import { Recipe } from "@/types/Recipe";
+import {  SendRecipe } from "@/types/Recipe";
 import Input from "../Input";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 type DetailProps = {
-  recipe: Recipe;
-  setRecipe: Dispatch<SetStateAction<Recipe>>;
+  recipe: SendRecipe;
+  setRecipe: Dispatch<SetStateAction<SendRecipe>>;
 };
 
 type PictureProps = {
   picture: File | undefined;
-  setPicture: Dispatch<SetStateAction<undefined>>;
+  setPicture: Dispatch<SetStateAction<File>>;
 };
 export default function FormDetailRecipe({
     detail,
@@ -29,7 +29,7 @@ export default function FormDetailRecipe({
         }
 
         const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-            const file = e.target.files?.[0];
+            const file: File | undefined = e.target.files?.[0];
             if (file) {
                 picture.setPicture(file);
             }
@@ -46,7 +46,7 @@ export default function FormDetailRecipe({
 
     return (
         <div className="ml-4">
-            <Input type="text" label="Titre" setValue={handleTitleChange} />
+            <Input type="text" label="Titre" value={detail.recipe.title} setValue={handleTitleChange} />
             { 
                 imagePreview && (
                 <div className="flex justify-center">
@@ -60,12 +60,12 @@ export default function FormDetailRecipe({
             }
             <div className="flex justify-center">
                 <input 
-                    type="file" 
+                    type="file"
                     onChange={handleFile}
                     className="border border-gray-400 rounded-sm p-2 m-2"
                     />
             </div>
-            <Input type="area" label="Description" setValue={handleDescriptionChange} />
+            <Input type="area" label="Description" value={detail.recipe.description} setValue={handleDescriptionChange} />
         </div>
     )
 }
