@@ -6,6 +6,7 @@ import fs from "fs";
 import path from "path";
 import { NextRequest, NextResponse } from "next/server";
 import Joi from "joi";
+import sharp from "sharp";
 
 const UPLOAD_DIR = path.resolve(process.env.ROOT_PATH ?? "", "public/uploads");
 
@@ -29,18 +30,33 @@ export async function POST(req: NextRequest, res: NextResponse) {
 	if(steps instanceof NextResponse) return steps;
 
 
-	const file = (body.picture as Blob) || null;
+	const file = (body.picture as File) || null;
 	
 	if (!file) {
 		return NextResponse.json({ error: "Picture is required" }, { status: 400 });
 	}
 
-	// DB SAVE
-	// await sql`INSERT INTO recipeathome.recipes ${sql(detail, 'title', 'description', 'image')}`;
 
+	await sql.begin(async sql => {
+		const [recipe] = await sql`INSERT INTO recipeathome.recipes ${sql(detail, 'title', 'description')} RETURNING id;`;
 
-	// file upload
-	savePicture(file, "123.jpg") //TODO CHANGE THE name
+		const recipeId = recipe.id;
+		
+		const ingredientsWithRecipe = ingredients.map(ing => ({
+			...ing,
+			recipe: recipeId
+		}));
+		await sql`INSERT INTO recipeathome.ingredients ${sql(ingredientsWithRecipe, 'recipe', 'name', 'quantity', 'unit')};`;
+
+		// TODO STEPS
+		const stepsWithRecipe = steps.map(step => ({
+			...step,
+			recipe: recipeId
+		}));
+		await sql`INSERT INTO recipeathome.steps ${sql(stepsWithRecipe, 'recipe', 'num', 'description')};`;
+
+		savePicture(file, recipeId);
+	});
 
 	return new Response();
 }
@@ -57,14 +73,43 @@ async function savePicture(file: Blob, fileName: string){
 		return NextResponse.json({ error: "File too large" }, { status: 400 });
 	}
 
+	let extension = '';
+	if (file.type === 'image/png') extension = '.png';
+	else if (file.type === 'image/jpeg') extension = '.jpg';
+
 	//save pic
-	const buffer = Buffer.from(await file.arrayBuffer());
+	const bufferRawImage = Buffer.from(await file.arrayBuffer());
+	const bufferCompressImage = await compressImage(bufferRawImage, file.type);
 	if (!fs.existsSync(UPLOAD_DIR)) {
 		fs.mkdirSync(UPLOAD_DIR);
 	}
-	fs.writeFileSync(path.resolve(UPLOAD_DIR, fileName), buffer);
+	fs.writeFileSync(path.resolve(UPLOAD_DIR, fileName+extension), bufferCompressImage);
 
 }
+
+
+async function compressImage(buffer: Buffer, mimeType: string): Promise<Buffer> {
+  if (mimeType === 'image/jpeg') {
+    return sharp(buffer)
+      .jpeg({
+        quality: 85,
+        mozjpeg: true
+      })
+      .toBuffer();
+  }
+
+  if (mimeType === 'image/png') {
+    return sharp(buffer)
+      .png({
+        compressionLevel: 6,
+        adaptiveFiltering: true
+      })
+      .toBuffer();
+  }
+
+  throw new Error('Unsupported image type');
+}
+
 
 
 function checkDetail(recipe: FormDataEntryValue): SendRecipe | NextResponse {
