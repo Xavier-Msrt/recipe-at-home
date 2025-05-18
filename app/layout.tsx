@@ -36,7 +36,7 @@ export default async function RootLayout({
 
             <nav className="flex justify-center m-4">
               <NavLink url="/" pageName={t("home-link")} />
-              <NavLink url="/add-recipe" pageName={t("add-recipe-link")} />
+              <NavLink url="/recipe/add" pageName={t("add-recipe-link")} />
               <LocalSwitcher />
             </nav>
           </div>

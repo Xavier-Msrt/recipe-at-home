@@ -8,7 +8,7 @@ export default function RecipeList({ search }: { search: string }) {
 
   useEffect(() => {
     async function fetchRecipes() {
-      const res = await fetch("/api/recipes");
+      const res = await fetch("/api/recipe");
       const data = await res.json();
       setRecipes(data);
     }

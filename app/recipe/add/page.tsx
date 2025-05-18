@@ -41,7 +41,7 @@ export default function AddRecipePage() {
     formData.append("steps", JSON.stringify(steps));
     if (picture) formData.append("picture", picture);
 
-    await fetch("/api/recipes", {
+    await fetch("/api/recipe", {
       method: "POST",
       body: formData,
     });
