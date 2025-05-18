@@ -4,9 +4,9 @@ import { NextApiResponse } from 'next';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request, { params }: { params: { id: number } }, res: NextApiResponse) {
-    const { id } = await params;
-    if(id < 0 || id > 9999) return  NextResponse.json({error: "id not correct"}, {status: 400});
-    
+  const { id } = await params;
+  if(id < 0 || id > 9999) return  NextResponse.json({error: "id not correct"}, {status: 400});
+  
 
   const extensions = ['.png', '.jpeg']
   const publicPath = process.cwd() + "/public/uploads";

@@ -29,7 +29,7 @@ export default async function RootLayout({
     <html lang={locale} className={montserrat.className}>
       <body>
         <NextIntlClientProvider>
-          <div className="flex flex-col h-screen justify-between">
+          <div className="flex flex-col h-screen justify-between gap-0">
             <div className="flex justify-between mb-4 bg-gray-50">
               <Link href="/" className="text-3xl font-bold text-orange-400 p-6">
                 {t("name")}
@@ -43,7 +43,7 @@ export default async function RootLayout({
             </div>
 
             <div className="container mx-auto">{children}</div>
-            
+
             <footer className="flex justify-center bg-orange-200 mt-8 p-4">
               <span className="text-white font-bold">{t("footer")}</span>
             </footer>

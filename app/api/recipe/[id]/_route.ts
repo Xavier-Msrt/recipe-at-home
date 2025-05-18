@@ -3,8 +3,7 @@ import { Ingredient } from '@/types/Ingredient';
 import { Recipe } from '@/types/Recipe';
 import { Step } from '@/types/Step';
 import { NextResponse } from 'next/server';
-import path from 'path';
-import fs from 'fs';
+
 
 export async function GET(req: Request, { params }: { params: { id: number } }) {
     const { id } = await params;

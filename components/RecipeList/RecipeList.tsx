@@ -27,8 +27,7 @@ export default function RecipeList({ search }: { search: string }) {
         return (
           <RecipeListCard
             key={recipe.id}
-            title={recipe.title}
-            description={recipe.description}
+            recipe={recipe}
           />
         );
       })}

@@ -7,12 +7,13 @@ import path from "path";
 import { NextRequest, NextResponse } from "next/server";
 import Joi from "joi";
 import sharp from "sharp";
+import { getRecipe } from "@/lib/recipe";
 
 const UPLOAD_DIR = path.resolve(process.env.ROOT_PATH ?? "", "public/uploads");
 
 export async function GET() {
   return new Response(
-    JSON.stringify(await sql<Recipe[]>`SELECT * FROM recipeathome.recipes;`)
+    JSON.stringify(await getRecipe())
   );
 }
 

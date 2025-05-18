@@ -30,5 +30,12 @@
     "FormStep": {
         "description": "description",
         "btn-add": "Add step"
+    },
+    "DetailRecipePage": {
+        "not-found-recipe": "This recipe doesn't exist",
+        "list-ingredients-title": "List of ingredient:"
+    },
+    "StepListItem": {
+        "step": "Step"
     }
 }

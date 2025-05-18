@@ -2,16 +2,16 @@
 import Image from "next/image";
 import Button from "../Button";
 import { useTranslations } from "next-intl";
+import { redirect } from "next/navigation";
+import { Recipe } from "@/types/Recipe";
 
 export default function RecipeListCard({
-  title,
-  description,
+  recipe
 }: {
-  title: string;
-  description: string;
+  recipe: Recipe
 }) {
   const handleButton = () => {
-    console.log("handleButton");
+    redirect(`/recipe/${recipe.id}`);
   };
   const t = useTranslations("RecipeCard");
 
@@ -27,9 +27,9 @@ export default function RecipeListCard({
         />
       </div>
       <div className="m-4">
-        <h3 className="text-2xl font-bold">{title}</h3>
+        <h3 className="text-2xl font-bold">{recipe.title}</h3>
         <div className="mt-4">
-          <p className="break-all">{description}</p>
+          <p className="break-all">{recipe.description}</p>
           <div className="flex justify-end-safe mt-4">
             <Button handle={handleButton} text={t("see-recipe")} />
           </div>
