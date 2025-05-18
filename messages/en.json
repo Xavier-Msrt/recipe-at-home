@@ -1,0 +1,34 @@
+{
+    "Main": {
+        "name": "Recipe @ Home",
+        "home-link": "Home",
+        "add-recipe-link": "Add recipe",
+        "footer": "Recipe @ Home - Open Source project to learn NextJS"
+    },
+    "SearchBar": {
+        "search": "Search for an recipe"
+    },
+    "RecipeCard": {
+        "see-recipe": "See",
+        "picture-alt": "Picture of the current recipe"
+    },
+    "AddRecipePage": {
+        "title": "Add an recipe",
+        "btn-create": "Create recipe"
+    },
+    "FormDetailRecipe": {
+        "title": "title",
+        "description": "description",
+        "image-alt": "Preview recipe picture"
+    },
+    "FormIngredient": {
+        "name": "name",
+        "quantity": "quantity",
+        "unit": "unit",
+        "btn-add": "Add ingredient"
+    },
+    "FormStep": {
+        "description": "description",
+        "btn-add": "Add step"
+    }
+}

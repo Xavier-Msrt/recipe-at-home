@@ -1,10 +1,9 @@
-
 export interface SendRecipe {
-    title: string
-    description: string
+  title: string;
+  description: string;
 }
 
 export interface Recipe extends SendRecipe {
-    id: number
-    image: string
+  id: number;
+  image: string;
 }

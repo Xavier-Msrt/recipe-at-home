@@ -1,4 +1,4 @@
 export type Step = {
-    num: number;
-    description: string;
-}
+  num: number;
+  description: string;
+};

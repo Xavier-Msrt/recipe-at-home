@@ -1,6 +1,7 @@
-import {  SendRecipe } from "@/types/Recipe";
+import { SendRecipe } from "@/types/Recipe";
 import Input from "../Input";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 type DetailProps = {
   recipe: SendRecipe;
@@ -9,63 +10,73 @@ type DetailProps = {
 
 type PictureProps = {
   picture: File | undefined;
-  setPicture: Dispatch<SetStateAction<File>>;
+  setPicture: Dispatch<SetStateAction<File | undefined>>;
 };
 export default function FormDetailRecipe({
-    detail,
-    picture
+  detail,
+  picture,
 }: {
-    detail: DetailProps,
-    picture: PictureProps
+  detail: DetailProps;
+  picture: PictureProps;
 }) {
-      const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const t = useTranslations("FormDetailRecipe");
 
-        const handleTitleChange = (title: string) => {
-            detail.setRecipe({...detail.recipe, title});
-        }
-    
-        const handleDescriptionChange = (description: string) => {
-            detail.setRecipe({...detail.recipe, description});
-        }
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-        const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-            const file: File | undefined = e.target.files?.[0];
-            if (file) {
-                picture.setPicture(file);
-            }
-        }
+  const handleTitleChange = (title: string) => {
+    detail.setRecipe({ ...detail.recipe, title });
+  };
 
-        useEffect(() => {
-            if (picture.picture) {
-                const previewUrl = URL.createObjectURL(picture.picture);
-                setImagePreview(previewUrl);
+  const handleDescriptionChange = (description: string) => {
+    detail.setRecipe({ ...detail.recipe, description });
+  };
 
-                return () => URL.revokeObjectURL(previewUrl);
-            }
-        }, [picture.picture]);
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file: File | undefined = e.target.files?.[0];
+    if (file) {
+      picture.setPicture(file);
+    }
+  };
 
-    return (
-        <div className="ml-4">
-            <Input type="text" label="Titre" value={detail.recipe.title} setValue={handleTitleChange} />
-            { 
-                imagePreview && (
-                <div className="flex justify-center">
-                    <img 
-                        src={imagePreview}   
-                        alt="Preview"
-                        className="w-auto max-h-60 mt-4 rounded shadow" 
-                        />
-                </div>)
+  useEffect(() => {
+    if (picture.picture) {
+      const previewUrl = URL.createObjectURL(picture.picture);
+      setImagePreview(previewUrl);
 
-            }
-            <div className="flex justify-center">
-                <input 
-                    type="file"
-                    onChange={handleFile}
-                    className="border border-gray-400 rounded-sm p-2 m-2"
-                    />
-            </div>
-            <Input type="area" label="Description" value={detail.recipe.description} setValue={handleDescriptionChange} />
+      return () => URL.revokeObjectURL(previewUrl);
+    }
+  }, [picture.picture]);
+
+  return (
+    <div className="ml-4">
+      <Input
+        type="text"
+        label={t("title")}
+        value={detail.recipe.title}
+        setValue={handleTitleChange}
+      />
+      {imagePreview && (
+        <div className="flex justify-center">
+          <img
+            src={imagePreview}
+            alt={t("image-alt")}
+            className="w-auto max-h-60 mt-4 rounded shadow"
+          />
         </div>
-    )
+      )}
+      <div className="flex justify-center">
+        <input
+          type="file"
+          onChange={handleFile}
+          className="border border-gray-400 rounded-sm p-2 m-2"
+        />
+      </div>
+      <Input
+        type="area"
+        label={t("description")}
+        value={detail.recipe.description}
+        setValue={handleDescriptionChange}
+      />
+    </div>
+  );
 }
