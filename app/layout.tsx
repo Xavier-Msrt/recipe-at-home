@@ -29,21 +29,25 @@ export default async function RootLayout({
     <html lang={locale} className={montserrat.className}>
       <body>
         <NextIntlClientProvider>
-          <div className="flex justify-between mb-4 bg-gray-50">
-            <Link href="/" className="text-3xl font-bold text-orange-400 p-6">
-              {t("name")}
-            </Link>
+          <div className="flex flex-col h-screen justify-between">
+            <div className="flex justify-between mb-4 bg-gray-50">
+              <Link href="/" className="text-3xl font-bold text-orange-400 p-6">
+                {t("name")}
+              </Link>
 
-            <nav className="flex justify-center m-4">
-              <NavLink url="/" pageName={t("home-link")} />
-              <NavLink url="/recipe/add" pageName={t("add-recipe-link")} />
-              <LocalSwitcher />
-            </nav>
+              <nav className="flex justify-center m-4">
+                <NavLink url="/" pageName={t("home-link")} />
+                <NavLink url="/recipe/add" pageName={t("add-recipe-link")} />
+                <LocalSwitcher />
+              </nav>
+            </div>
+
+            <div className="container mx-auto">{children}</div>
+            
+            <footer className="flex justify-center bg-orange-200 mt-8 p-4">
+              <span className="text-white font-bold">{t("footer")}</span>
+            </footer>
           </div>
-          <div className="container mx-auto">{children}</div>
-          <footer className="flex justify-center bg-orange-200 mt-8 p-4">
-            <span className="text-white font-bold">{t("footer")}</span>
-          </footer>
         </NextIntlClientProvider>
       </body>
     </html>
