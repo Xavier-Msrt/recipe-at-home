@@ -1,8 +1,8 @@
-import { Ingredient } from "@/types/Ingredient";
-import { Dispatch, SetStateAction } from "react";
-import Input from "../Input";
-import Button from "../Button";
-import { useTranslations } from "next-intl";
+import { Ingredient } from '@/types/Ingredient';
+import { Dispatch, SetStateAction } from 'react';
+import Input from '../Input';
+import Button from '../Button';
+import { useTranslations } from 'next-intl';
 
 export default function FormIngredient({
   ingredients,
@@ -11,7 +11,7 @@ export default function FormIngredient({
   ingredients: Ingredient[];
   setIngredients: Dispatch<SetStateAction<Ingredient[]>>;
 }) {
-  const t = useTranslations("FormIngredient");
+  const t = useTranslations('FormIngredient');
 
   const handleIngredientsChange = (
     index: number,
@@ -30,9 +30,9 @@ export default function FormIngredient({
     const originalIngredients = [...ingredients];
     originalIngredients.push({
       id: 0,
-      name: "",
+      name: '',
       quantity: 0,
-      unit: "",
+      unit: '',
     });
     setIngredients(originalIngredients);
   };
@@ -46,28 +46,28 @@ export default function FormIngredient({
             <div className="flex gap-4" key={index}>
               <Input
                 type="text"
-                label={t("name")}
+                label={t('name')}
                 value={v.name}
-                setValue={(v) => handleIngredientsChange(index, "name", v)}
+                setValue={(v) => handleIngredientsChange(index, 'name', v)}
               />
               <Input
                 type="text"
-                label={t("quantity")}
+                label={t('quantity')}
                 value={v.quantity}
-                setValue={(v) => handleIngredientsChange(index, "quantity", v)}
+                setValue={(v) => handleIngredientsChange(index, 'quantity', v)}
               />
               <Input
                 type="text"
-                label={t("unit")}
+                label={t('unit')}
                 value={v.unit}
-                setValue={(v) => handleIngredientsChange(index, "unit", v)}
+                setValue={(v) => handleIngredientsChange(index, 'unit', v)}
               />
             </div>
           );
         })}
       </div>
       <div className="flex justify-end mt-2">
-        <Button text={t("btn-add")} handle={handleAddIngredient} />
+        <Button text={t('btn-add')} handle={handleAddIngredient} />
       </div>
     </>
   );

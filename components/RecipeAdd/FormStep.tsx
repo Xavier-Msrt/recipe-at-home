@@ -1,8 +1,8 @@
-import { Step } from "@/types/Step";
-import { Dispatch, SetStateAction } from "react";
-import Input from "../Input";
-import Button from "../Button";
-import { useTranslations } from "next-intl";
+import { Step } from '@/types/Step';
+import { Dispatch, SetStateAction } from 'react';
+import Input from '../Input';
+import Button from '../Button';
+import { useTranslations } from 'next-intl';
 
 export default function FormStep({
   steps,
@@ -11,7 +11,7 @@ export default function FormStep({
   steps: Step[];
   setSteps: Dispatch<SetStateAction<Step[]>>;
 }) {
-  const t = useTranslations("FormStep");
+  const t = useTranslations('FormStep');
 
   const handleStepChange = (index: number, key: keyof Step, value: string) => {
     const updatedSteps = [...steps];
@@ -26,7 +26,7 @@ export default function FormStep({
     const originalSteps = [...steps];
     originalSteps.push({
       num: steps.length + 1,
-      description: "",
+      description: '',
     });
     setSteps(originalSteps);
   };
@@ -40,16 +40,16 @@ export default function FormStep({
             <div key={v.num}>
               <Input
                 type="text"
-                label={t("description")}
+                label={t('description')}
                 value={v.description}
-                setValue={(v) => handleStepChange(index, "description", v)}
+                setValue={(v) => handleStepChange(index, 'description', v)}
               />
             </div>
           );
         })}
       </div>
       <div className="flex justify-end">
-        <Button text={t("btn-add")} handle={handleAddStep} />
+        <Button text={t('btn-add')} handle={handleAddStep} />
       </div>
     </>
   );

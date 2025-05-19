@@ -1,7 +1,8 @@
-import { SendRecipe } from "@/types/Recipe";
-import Input from "../Input";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { SendRecipe } from '@/types/Recipe';
+import Input from '../Input';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 type DetailProps = {
   recipe: SendRecipe;
@@ -19,7 +20,7 @@ export default function FormDetailRecipe({
   detail: DetailProps;
   picture: PictureProps;
 }) {
-  const t = useTranslations("FormDetailRecipe");
+  const t = useTranslations('FormDetailRecipe');
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -51,15 +52,15 @@ export default function FormDetailRecipe({
     <div className="ml-4">
       <Input
         type="text"
-        label={t("title")}
+        label={t('title')}
         value={detail.recipe.title}
         setValue={handleTitleChange}
       />
       {imagePreview && (
         <div className="flex justify-center">
-          <img
+          <Image
             src={imagePreview}
-            alt={t("image-alt")}
+            alt={t('image-alt')}
             className="w-auto max-h-60 mt-4 rounded shadow"
           />
         </div>
@@ -73,7 +74,7 @@ export default function FormDetailRecipe({
       </div>
       <Input
         type="area"
-        label={t("description")}
+        label={t('description')}
         value={detail.recipe.description}
         setValue={handleDescriptionChange}
       />

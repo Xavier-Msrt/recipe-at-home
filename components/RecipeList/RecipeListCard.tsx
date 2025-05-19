@@ -1,25 +1,21 @@
-"use client";
-import Image from "next/image";
-import Button from "../Button";
-import { useTranslations } from "next-intl";
-import { redirect } from "next/navigation";
-import { Recipe } from "@/types/Recipe";
+'use client';
+import Image from 'next/image';
+import Button from '../Button';
+import { useTranslations } from 'next-intl';
+import { redirect } from 'next/navigation';
+import { Recipe } from '@/types/Recipe';
 
-export default function RecipeListCard({
-  recipe
-}: {
-  recipe: Recipe
-}) {
+export default function RecipeListCard({ recipe }: { recipe: Recipe }) {
   const handleButton = () => {
     redirect(`/recipe/${recipe.id}`);
   };
-  const t = useTranslations("RecipeCard");
+  const t = useTranslations('RecipeCard');
 
   return (
     <div className="rounded-xl shadow-2xl w-1/3">
       <div className="flex justify-center">
         <Image
-          alt={t("picture-alt")}
+          alt={t('picture-alt')}
           src={`/api/recipe/${recipe.id}/picture`}
           width={1920}
           height={1080}
@@ -31,7 +27,7 @@ export default function RecipeListCard({
         <div className="mt-4">
           <p className="break-all">{recipe.description}</p>
           <div className="flex justify-end-safe mt-4">
-            <Button handle={handleButton} text={t("see-recipe")} />
+            <Button handle={handleButton} text={t('see-recipe')} />
           </div>
         </div>
       </div>

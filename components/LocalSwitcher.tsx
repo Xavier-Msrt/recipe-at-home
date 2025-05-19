@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { setUserLocale } from "@/services/locale";
-import { useLocale } from "next-intl";
-import { MouseEvent, useTransition } from "react";
+import { setUserLocale } from '@/services/locale';
+import { useLocale } from 'next-intl';
+import { MouseEvent, useTransition } from 'react';
 
 export default function LocalSwitcher() {
-    const [isPending, startTransition] = useTransition();
-    const currentLocal = useLocale();
+  const [, startTransition] = useTransition();
+  const currentLocal = useLocale();
 
   function onChange(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -15,12 +15,11 @@ export default function LocalSwitcher() {
     });
   }
 
-    return (
-        <>
-            <button 
-            onClick={onChange}
-            className="text-3xl mx-2"
-            >{currentLocal == 'fr' ? '🇬🇧' : '🇫🇷'}</button>
-        </>
-    )
+  return (
+    <>
+      <button onClick={onChange} className="text-3xl mx-2">
+        {currentLocal == 'fr' ? '🇬🇧' : '🇫🇷'}
+      </button>
+    </>
+  );
 }

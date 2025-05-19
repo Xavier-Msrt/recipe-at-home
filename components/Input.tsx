@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef } from 'react';
 
 export default function Input({
   type,
@@ -15,12 +15,12 @@ export default function Input({
 
   const handleChangeInput = (value: string) => setValue(value);
   const handleChangeTextArea = () =>
-    setValue(textAreaRef?.current?.value ?? "");
+    setValue(textAreaRef?.current?.value ?? '');
 
   return (
     <div className="flex flex-col my-4">
       <label className=" font-bold mb-2">{label}</label>
-      {type === "area" ? (
+      {type === 'area' ? (
         <textarea
           className="border border-gray-400 rounded-sm p-2 w-full resize-none"
           value={value}

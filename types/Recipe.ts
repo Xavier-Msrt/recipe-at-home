@@ -1,5 +1,5 @@
-import { Ingredient } from "./Ingredient";
-import { Step } from "./Step";
+import { Ingredient } from './Ingredient';
+import { Step } from './Step';
 
 export interface SendRecipe {
   title: string;
@@ -12,6 +12,6 @@ export interface Recipe extends SendRecipe {
 }
 
 export interface FullRecipe extends SendRecipe {
-  steps: Step[]
-  ingredients: Ingredient[]
+  steps: Step[];
+  ingredients: Ingredient[];
 }

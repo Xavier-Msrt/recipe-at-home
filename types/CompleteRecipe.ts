@@ -1,5 +1,5 @@
-import { Step } from "@/types/Step";
-import { Ingredient } from "./Ingredient";
+import { Step } from '@/types/Step';
+import { Ingredient } from './Ingredient';
 
 export type CompleteRecipe = {
   id: number | undefined;
