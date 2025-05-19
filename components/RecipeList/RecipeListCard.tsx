@@ -20,7 +20,7 @@ export default function RecipeListCard({
       <div className="flex justify-center">
         <Image
           alt={t("picture-alt")}
-          src="/pasta.jpg"
+          src={`/api/recipe/${recipe.id}/picture`}
           width={1920}
           height={1080}
           className="flex justify-center rounded-t-xl"

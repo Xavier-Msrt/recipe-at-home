@@ -29,6 +29,7 @@ export default function FormIngredient({
   const handleAddIngredient = () => {
     const originalIngredients = [...ingredients];
     originalIngredients.push({
+      id: 0,
       name: "",
       quantity: 0,
       unit: "",

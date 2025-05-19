@@ -34,13 +34,17 @@ export async function getOneRecipeDetail(id: number) {
 export async function getRecipePicture(id : number) {
   if(id < 0 || id > 9999) throw new Error("id not correct");
   
-  const extensions = ['.png', '.jpeg']
+  const extensions = ['.png', '.jpeg', '.jpg']
   const publicPath = process.cwd() + "/public/uploads";
 
   for (let ext of extensions) {
     const filePath = path.join(publicPath, `${id}${ext}`)
     if (fs.existsSync(filePath)) {
-        return `/uploads/${id}${ext}`;
+      return {
+        apiPath: `/uploads/${id}${ext}`,
+        filePath,
+        ext
+      }
     }
   }
   throw new Error("Server error");

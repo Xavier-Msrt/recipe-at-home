@@ -17,7 +17,7 @@ export default async function RecipeDetail({
     let picture: String;
     try {
         recipe = await getOneRecipeDetail(id) as FullRecipe;
-        picture = await getRecipePicture(id) as String;
+        picture = (await getRecipePicture(id)).apiPath as string;
     } catch (error) {
         return (
             <>
@@ -26,11 +26,10 @@ export default async function RecipeDetail({
         );
     }
 
-
     return(
         <>
-            <div className="flex flex-row justify-between gap-5 h-100">
-                <div className="shadow-2xl rounded-2xl bg-orange-200 w-1/4">
+            <div className="flex flex-row justify-between gap-5">
+                <div className="shadow-2xl rounded-2xl bg-orange-200 w-1/4 h-full">
                     <div className="flex justify-center">
                         <img 
                             src={picture}

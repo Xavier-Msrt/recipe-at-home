@@ -20,6 +20,7 @@ export default function AddRecipePage() {
 
   const [ingredients, setIngredients] = useState<Ingredient[]>([
     {
+      id: 0,
       name: "",
       quantity: 0,
       unit: "",

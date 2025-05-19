@@ -57,7 +57,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
       "unit"
     )};`;
 
-    // TODO STEPS
     const stepsWithRecipe = steps.map((step) => ({
       ...step,
       recipe: recipeId,
@@ -139,8 +138,8 @@ function checkDetail(recipe: FormDataEntryValue): SendRecipe | NextResponse {
 
   const recipeDetail: Recipe = JSON.parse(recipe.toString());
   const schemaRecipeDetail = Joi.object({
-    title: Joi.string().alphanum().min(3).max(150).required(),
-    description: Joi.string().alphanum().min(10).max(700).required(),
+    title: Joi.string().pattern(/^[\p{L}\p{N} ^¨`´'.!?,-]*$/u).min(3).max(150).required(),
+    description: Joi.string().pattern(/^[\p{L}\p{N} ^¨`´'.!?,-]*$/u).min(10).max(700).required(),
   });
 
   const { error } = schemaRecipeDetail.validate(recipeDetail);
@@ -162,9 +161,10 @@ function checkIngredients(
   }
 
   const schemaIngredient = Joi.object({
-    name: Joi.string().alphanum().min(3).max(30).required(),
-    quantity: Joi.number().greater(0).less(100).required(),
-    unit: Joi.string().alphanum().min(1).max(10).allow(null, ""),
+    id: Joi.number().default(0),
+    name: Joi.string().pattern(/^[\p{L}\p{N} ^¨`´'.!?,-]*$/u).min(3).max(30).required(),
+    quantity: Joi.number().greater(0).less(9999).required(),
+    unit: Joi.string().pattern(/^[\p{L}\p{N} ^¨`´'.!?,-]*$/u).min(1).max(10).allow(null, ""),
   });
 
   const ingredientsObj: Ingredient[] = JSON.parse(ingredients.toString());
@@ -190,7 +190,7 @@ function checkSteps(steps: FormDataEntryValue): Step[] | NextResponse {
 
   const schemaStep = Joi.object({
     num: Joi.number().required().greater(0).less(100).required(),
-    description: Joi.string().alphanum().min(5).max(700).required(),
+    description: Joi.string().pattern(/^[\p{L}\p{N} ^¨`´'.!?,-]*$/u).min(5).max(700).required(),
   });
 
   const stepsObj: Step[] = JSON.parse(steps.toString());
