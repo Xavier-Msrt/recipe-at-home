@@ -5,32 +5,32 @@ import { Step } from '@/types/Step';
 import { NextResponse } from 'next/server';
 
 export async function GET(
-  req: Request,
-  { params }: { params: { id: number } }
+    req: Request,
+    { params }: { params: { id: number } }
 ) {
-  const { id } = await params;
-  if (id < 0 || id > 9999)
-    return NextResponse.json({ error: 'id not correct' }, { status: 400 });
+    const { id } = await params;
+    if (id < 0 || id > 9999)
+        return NextResponse.json({ error: 'id not correct' }, { status: 400 });
 
-  let recipe = {};
+    let recipe = {};
 
-  try {
-    const detail = await sql<
-      Recipe[]
-    >`SELECT * FROM recipeathome.recipes WHERE id = ${id};`;
-    recipe = detail[0];
+    try {
+        const detail = await sql<
+            Recipe[]
+        >`SELECT * FROM recipeathome.recipes WHERE id = ${id};`;
+        recipe = detail[0];
 
-    const ingredients = await sql<
-      Ingredient[]
-    >`SELECT * FROM recipeathome.ingredients WHERE recipe = ${id};`;
-    recipe = { ...recipe, ingredients };
+        const ingredients = await sql<
+            Ingredient[]
+        >`SELECT * FROM recipeathome.ingredients WHERE recipe = ${id};`;
+        recipe = { ...recipe, ingredients };
 
-    const steps = await sql<
-      Step[]
-    >`SELECT * FROM recipeathome.steps WHERE recipe = ${id};`;
-    recipe = { ...recipe, steps };
-  } catch {
-    return NextResponse.json({ error: 'Server error' }, { status: 500 });
-  }
-  return NextResponse.json(JSON.stringify(recipe));
+        const steps = await sql<
+            Step[]
+        >`SELECT * FROM recipeathome.steps WHERE recipe = ${id};`;
+        recipe = { ...recipe, steps };
+    } catch {
+        return NextResponse.json({ error: 'Server error' }, { status: 500 });
+    }
+    return NextResponse.json(JSON.stringify(recipe));
 }

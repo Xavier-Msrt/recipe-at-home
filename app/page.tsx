@@ -4,12 +4,12 @@ import { useState } from 'react';
 import RecipeList from '@/components/RecipeList/RecipeList';
 
 export default function Home() {
-  const [query, setQuery] = useState<string>('');
+    const [query, setQuery] = useState<string>('');
 
-  return (
-    <>
-      <SearchBar query={query} setQuery={setQuery} />
-      <RecipeList search={query} />
-    </>
-  );
+    return (
+        <>
+            <SearchBar query={query} setQuery={setQuery} />
+            <RecipeList search={query} />
+        </>
+    );
 }

@@ -1,41 +1,41 @@
 {
-  "Main": {
-    "name": "Recipe @ Home",
-    "home-link": "Accueil",
-    "add-recipe-link": "Ajouter une recette",
-    "footer": "Recipe @ Home - Projet open source pour apprendre NextJS"
-  },
-  "SearchBar": {
-    "search": "Rechercher une recette"
-  },
-  "RecipeCard": {
-    "see-recipe": "Voir",
-    "picture-alt": "Image de la recette actuelle"
-  },
-  "AddRecipePage": {
-    "title": "Ajouter une recette",
-    "btn-create": "Créer la recette"
-  },
-  "FormDetailRecipe": {
-    "title": "titre",
-    "description": "description",
-    "image-alt": "Aperçu de l’image de la recette"
-  },
-  "FormIngredient": {
-    "name": "nom",
-    "quantity": "quantité",
-    "unit": "unité",
-    "btn-add": "Ajouter un ingrédient"
-  },
-  "FormStep": {
-    "description": "description",
-    "btn-add": "Ajouter une étape"
-  },
-  "DetailRecipePage": {
-    "not-found-recipe": "Cette recette n'existe pas",
-    "list-ingredients-title": "Liste des ingrédients :"
-  },
-  "StepListItem": {
-    "step": "Étape"
-  }
+    "Main": {
+        "name": "Recipe @ Home",
+        "home-link": "Accueil",
+        "add-recipe-link": "Ajouter une recette",
+        "footer": "Recipe @ Home - Projet open source pour apprendre NextJS"
+    },
+    "SearchBar": {
+        "search": "Rechercher une recette"
+    },
+    "RecipeCard": {
+        "see-recipe": "Voir",
+        "picture-alt": "Image de la recette actuelle"
+    },
+    "AddRecipePage": {
+        "title": "Ajouter une recette",
+        "btn-create": "Créer la recette"
+    },
+    "FormDetailRecipe": {
+        "title": "titre",
+        "description": "description",
+        "image-alt": "Aperçu de l’image de la recette"
+    },
+    "FormIngredient": {
+        "name": "nom",
+        "quantity": "quantité",
+        "unit": "unité",
+        "btn-add": "Ajouter un ingrédient"
+    },
+    "FormStep": {
+        "description": "description",
+        "btn-add": "Ajouter une étape"
+    },
+    "DetailRecipePage": {
+        "not-found-recipe": "Cette recette n'existe pas",
+        "list-ingredients-title": "Liste des ingrédients :"
+    },
+    "StepListItem": {
+        "step": "Étape"
+    }
 }

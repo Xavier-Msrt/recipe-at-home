@@ -8,48 +8,56 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import LocalSwitcher from '@/components/LocalSwitcher';
 
 const montserrat = Montserrat({
-  weight: '400',
-  subsets: ['latin'],
+    weight: '400',
+    subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: 'Recipe @ Home',
-  description: 'List all of your private recipe',
+    title: 'Recipe @ Home',
+    description: 'List all of your private recipe',
 };
 
 export default async function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
-  const t = await getTranslations('Main');
+    const locale = await getLocale();
+    const t = await getTranslations('Main');
 
-  return (
-    <html lang={locale} className={montserrat.className}>
-      <body>
-        <NextIntlClientProvider>
-          <div className="flex flex-col h-screen justify-between gap-0">
-            <div className="flex justify-between mb-4 bg-gray-50">
-              <Link href="/" className="text-3xl font-bold text-orange-400 p-6">
-                {t('name')}
-              </Link>
+    return (
+        <html lang={locale} className={montserrat.className}>
+            <body>
+                <NextIntlClientProvider>
+                    <div className="flex flex-col h-screen justify-between gap-0">
+                        <div className="flex justify-between mb-4 bg-gray-50">
+                            <Link
+                                href="/"
+                                className="text-3xl font-bold text-orange-400 p-6"
+                            >
+                                {t('name')}
+                            </Link>
 
-              <nav className="flex justify-center m-4">
-                <NavLink url="/" pageName={t('home-link')} />
-                <NavLink url="/recipe/add" pageName={t('add-recipe-link')} />
-                <LocalSwitcher />
-              </nav>
-            </div>
+                            <nav className="flex justify-center m-4">
+                                <NavLink url="/" pageName={t('home-link')} />
+                                <NavLink
+                                    url="/recipe/add"
+                                    pageName={t('add-recipe-link')}
+                                />
+                                <LocalSwitcher />
+                            </nav>
+                        </div>
 
-            <div className="container mx-auto">{children}</div>
+                        <div className="container mx-auto">{children}</div>
 
-            <footer className="flex justify-center bg-orange-200 mt-8 p-4">
-              <span className="text-white font-bold">{t('footer')}</span>
-            </footer>
-          </div>
-        </NextIntlClientProvider>
-      </body>
-    </html>
-  );
+                        <footer className="flex justify-center bg-orange-200 mt-8 p-4">
+                            <span className="text-white font-bold">
+                                {t('footer')}
+                            </span>
+                        </footer>
+                    </div>
+                </NextIntlClientProvider>
+            </body>
+        </html>
+    );
 }
