@@ -24,7 +24,7 @@ export default function RecipeListCard({ recipe }: { recipe: Recipe }) {
                 />
             </div>
             <div className="m-4">
-                <h3 className="text-2xl font-bold">{recipe.title}</h3>
+                <h3 className="text-2xl font-bold break-all">{recipe.title}</h3>
                 <div className="mt-4">
                     <p className="break-all">{recipe.description}</p>
                     <div className="flex justify-end-safe mt-4">
