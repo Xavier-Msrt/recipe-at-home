@@ -11,6 +11,7 @@ import { useTranslations } from 'next-intl';
 
 export default function AddRecipePage() {
     const t = useTranslations('AddRecipePage');
+    const [error, setError] = useState('');
 
     const [recipe, setRecipe] = useState<SendRecipe>({
         title: '',
@@ -42,15 +43,43 @@ export default function AddRecipePage() {
         formData.append('steps', JSON.stringify(steps));
         if (picture) formData.append('picture', picture);
 
-        await fetch('/api/recipe', {
+        const data = await fetch('/api/recipe', {
             method: 'POST',
             body: formData,
         });
+        if (data.status !== 201) {
+            const body = await data.json();
+            setError(body?.error);
+        } else {
+            setRecipe({
+                title: '',
+                description: '',
+            });
+            setIngredients([
+                {
+                    id: 0,
+                    name: '',
+                    quantity: 0,
+                    unit: '',
+                },
+            ]);
+            setSteps([
+                {
+                    num: 1,
+                    description: '',
+                },
+            ]);
+        }
     };
 
     return (
         <div className="flex justify-center">
-            <div className="w-1/2 shadow-md rounded-lg p-4">
+            <div
+                className={
+                    'w-1/2 shadow-md rounded-lg p-4 ' +
+                    (error !== '' ? 'border-2 border-red-600' : '')
+                }
+            >
                 <h1 className="text-2xl font-bold mt-4">{t('title')}</h1>
                 <form>
                     <FormDetailRecipe
@@ -62,7 +91,11 @@ export default function AddRecipePage() {
                         setIngredients={setIngredients}
                     />
                     <FormStep steps={steps} setSteps={setSteps} />
-
+                    {error !== '' ? (
+                        <p className="text-red-600">{error}</p>
+                    ) : (
+                        ''
+                    )}
                     <div className="flex justify-center mt-4">
                         <Button
                             text={t('btn-create')}

@@ -15,6 +15,7 @@ export default function RecipeListCard({ recipe }: { recipe: Recipe }) {
         <div className="rounded-xl shadow-2xl w-1/3">
             <div className="flex justify-center">
                 <Image
+                    priority={true}
                     alt={t('picture-alt')}
                     src={`/api/recipe/${recipe.id}/picture`}
                     width={1920}

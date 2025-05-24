@@ -1,16 +1,18 @@
 import fs from 'fs';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getRecipePicture } from '@/lib/recipe';
 import { AppError } from '@/lib/erros';
 
-export async function GET({ params }: { params: { id: number } }) {
-    const { id } = await params;
-
+export async function GET(
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
     try {
-        const { filePath, ext } = await getRecipePicture(id);
+        const id = (await params).id;
+        const { filePath, ext } = getRecipePicture(Number(id));
         const imageBuffer = fs.readFileSync(filePath);
 
-        return new NextResponse(new Uint8Array(imageBuffer), {
+        return new NextResponse(imageBuffer, {
             status: 200,
             headers: {
                 'Content-Type': getMimeType(ext),
@@ -18,6 +20,7 @@ export async function GET({ params }: { params: { id: number } }) {
             },
         });
     } catch (error) {
+        console.log(error);
         if (error instanceof AppError) {
             return NextResponse.json(
                 { error: error.message },

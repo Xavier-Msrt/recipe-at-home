@@ -36,8 +36,8 @@ export async function getOneRecipeDetail(id: number) {
     return recipe;
 }
 
-export async function getRecipePicture(id: number) {
-    if (id < 0 || id > 9999) throw new InvalidId;
+export function getRecipePicture(id: number) {
+    if (id < 0 || id > 9999) throw new InvalidId();
 
     const extensions = ['.png', '.jpeg', '.jpg'];
     const publicPath = process.cwd() + '/public/uploads';
