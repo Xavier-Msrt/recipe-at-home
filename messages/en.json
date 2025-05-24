@@ -8,8 +8,10 @@
     "SearchBar": {
         "search": "Search for an recipe"
     },
-    "RecipeCard": {
+    "RecipeListCard": {
         "see-recipe": "See",
+        "delete-recipe": "Remove",
+        "confirm-delete": "Are you sure you want to delete this?",
         "picture-alt": "Picture of the current recipe"
     },
     "AddRecipePage": {

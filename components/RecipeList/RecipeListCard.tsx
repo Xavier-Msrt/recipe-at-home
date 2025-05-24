@@ -6,10 +6,18 @@ import { redirect } from 'next/navigation';
 import { Recipe } from '@/types/Recipe';
 
 export default function RecipeListCard({ recipe }: { recipe: Recipe }) {
-    const handleButton = () => {
+    const t = useTranslations('RecipeListCard');
+
+    const handleButtonSee = () => {
         redirect(`/recipe/${recipe.id}`);
     };
-    const t = useTranslations('RecipeCard');
+    const handleButtonDelete = async () => {
+        if (confirm(t('confirm-delete') + ` (${recipe.title})`)) {
+            await fetch(`/api/recipe/${recipe.id}`, {
+                method: 'DELETE',
+            });
+        }
+    };
 
     return (
         <div className="rounded-xl shadow-2xl w-1/3">
@@ -27,8 +35,15 @@ export default function RecipeListCard({ recipe }: { recipe: Recipe }) {
                 <h3 className="text-2xl font-bold break-all">{recipe.title}</h3>
                 <div className="mt-4">
                     <p className="break-all">{recipe.description}</p>
-                    <div className="flex justify-end-safe mt-4">
-                        <Button handle={handleButton} text={t('see-recipe')} />
+                    <div className="flex justify-end-safe mt-4 gap-4">
+                        <Button
+                            handle={handleButtonDelete}
+                            text={t('delete-recipe')}
+                        />
+                        <Button
+                            handle={handleButtonSee}
+                            text={t('see-recipe')}
+                        />
                     </div>
                 </div>
             </div>
