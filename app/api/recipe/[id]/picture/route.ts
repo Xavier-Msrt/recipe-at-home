@@ -1,7 +1,6 @@
 import fs from 'fs';
 import { NextRequest, NextResponse } from 'next/server';
 import { getRecipePicture } from '@/lib/recipe';
-import { AppError } from '@/lib/erros';
 
 export async function GET(
     request: NextRequest,
@@ -19,19 +18,8 @@ export async function GET(
                 'Content-Disposition': `inline; filename="${id}${ext}"`,
             },
         });
-    } catch (error) {
-        console.log(error);
-        if (error instanceof AppError) {
-            return NextResponse.json(
-                { error: error.message },
-                { status: error.statusCode }
-            );
-        }
-
-        return NextResponse.json(
-            { error: 'Internal server error' },
-            { status: 500 }
-        );
+    } catch {
+        return new Response(null, { status: 500 });
     }
 }
 
