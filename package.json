@@ -10,10 +10,11 @@
         "format": "prettier --write ."
     },
     "dependencies": {
-        "@prisma/adapter-pg": "^6.8.2",
         "@prisma/client": "6.8.2",
+        "lodash.debounce": "^4.0.8",
         "next": "15.3.2",
         "next-intl": "^4.1.0",
+        "pg": "^8.16.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
         "use-intl": "^4.1.0"
