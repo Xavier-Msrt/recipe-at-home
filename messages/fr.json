@@ -1,0 +1,8 @@
+{
+    "Main": {
+        "name": "Recipe @ Home",
+        "home-link": "Accueil",
+        "add-recipe-link": "Ajouter une recette",
+        "footer": "Recipe @ Home - Projet open source pour apprendre NextJS"
+    }
+}
