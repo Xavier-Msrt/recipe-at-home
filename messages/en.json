@@ -4,5 +4,8 @@
         "home-link": "Home",
         "add-recipe-link": "Add recipe",
         "footer": "Recipe @ Home - Open Source project to learn NextJS"
+    },
+    "SearchBar": {
+        "search": "Search"
     }
 }
