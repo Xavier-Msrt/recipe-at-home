@@ -3,7 +3,7 @@ import SearchBar from '@/components/SearchBar';
 import RecipeList from '@/components/RecipeList';
 import Pagination from '@/components/Pagination';
 
-export default async function Home({
+export default async function Page({
     searchParams,
 }: {
     searchParams: { query?: string; page?: string };
