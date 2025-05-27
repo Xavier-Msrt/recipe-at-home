@@ -7,5 +7,9 @@
     },
     "SearchBar": {
         "search": "Search"
+    },
+    "RecipeList": {
+        "empty-list": "No recipes found.",
+        "btn-see": "View"
     }
 }

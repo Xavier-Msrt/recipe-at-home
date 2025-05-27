@@ -24,7 +24,7 @@ export default function SearchBar({ initialQuery }: { initialQuery: string }) {
     }, [query]);
 
     return (
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center my-8">
             <label className="input">
                 <svg
                     className="h-[1em] opacity-50"
@@ -32,9 +32,9 @@ export default function SearchBar({ initialQuery }: { initialQuery: string }) {
                     viewBox="0 0 24 24"
                 >
                     <g
-                        stroke-linejoin="round"
-                        stroke-linecap="round"
-                        stroke-width="2.5"
+                        strokeLinejoin="round"
+                        strokeLinecap="round"
+                        strokeWidth="2.5"
                         fill="none"
                         stroke="currentColor"
                     >
@@ -44,7 +44,7 @@ export default function SearchBar({ initialQuery }: { initialQuery: string }) {
                 </svg>
                 <input
                     type="search"
-                    className="grow"
+                    className="grow input-xl"
                     placeholder={t('search')}
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}

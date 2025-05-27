@@ -1,20 +1,26 @@
 import { searchRecipes } from './actions/searchRecipes';
 import SearchBar from '@/components/SearchBar';
 import RecipeList from '@/components/RecipeList';
+import Pagination from '@/components/Pagination';
 
 export default async function Home({
     searchParams,
 }: {
-    searchParams: { query?: string };
+    searchParams: { query?: string; page?: string };
 }) {
     const params = await searchParams;
     const query = params.query || '';
-    const recipes = await searchRecipes(query);
+    const page = parseInt(searchParams.page || '1');
+    const pageSize = 9;
+
+    const { recipes, total } = await searchRecipes(query, page, pageSize);
+    const totalPages = Math.ceil(total / pageSize);
 
     return (
-        <main className="p-6 max-w-4xl mx-auto">
+        <div className='mb-20'>
             <SearchBar initialQuery={query} />
             <RecipeList recipes={recipes} />
-        </main>
+            <Pagination page={page} totalPages={totalPages} query={query} />
+        </div>
     );
 }
