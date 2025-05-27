@@ -10,7 +10,7 @@ export default async function Home({
 }) {
     const params = await searchParams;
     const query = params.query || '';
-    const page = parseInt(searchParams.page || '1');
+    const page = parseInt(params.page || '1');
     const pageSize = 9;
 
     const { recipes, total } = await searchRecipes(query, page, pageSize);
