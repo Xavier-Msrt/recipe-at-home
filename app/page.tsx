@@ -17,7 +17,7 @@ export default async function Page({
     const totalPages = Math.ceil(total / pageSize);
 
     return (
-        <div className='mb-20'>
+        <div className="mb-20">
             <SearchBar initialQuery={query} />
             <RecipeList recipes={recipes} />
             <Pagination page={page} totalPages={totalPages} query={query} />
