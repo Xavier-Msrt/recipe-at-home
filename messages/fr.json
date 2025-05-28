@@ -11,5 +11,13 @@
     "RecipeList": {
         "empty-list": "Aucune recette trouvée.",
         "btn-see": "Voir"
+    },
+    "IngredientForm": {
+    "name": "Nom",
+    "quantity": "Quantité",
+    "quantity-placeholder": "Tomate",
+    "unite": "Unité",
+    "unite-placeholder": "pièce",
+    "add-ingredient-btn": "Ajouter un ingrédient"
     }
 }

@@ -11,5 +11,13 @@
     "RecipeList": {
         "empty-list": "No recipes found.",
         "btn-see": "View"
+    },
+    "IngredientForm": {
+        "name": "Name",
+        "quantity": "Quantity",
+        "quantity-placeholder": "Tomato",
+        "unite": "Unite",
+        "unite-placeholder": "piece",
+        "add-ingredient-btn": "Add ingredient"
     }
 }
