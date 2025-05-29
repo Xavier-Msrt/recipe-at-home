@@ -19,5 +19,10 @@
         "unite": "Unite",
         "unite-placeholder": "piece",
         "add-ingredient-btn": "Add ingredient"
+    },
+    "StepFrom": {
+        "step": "Step",
+        "step-placeholder": "Cut the tomato into 4 pieces",
+        "add-step-btn": "Add step"
     }
 }
