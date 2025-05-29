@@ -24,5 +24,15 @@
         "step": "Step",
         "step-placeholder": "Cut the tomato into 4 pieces",
         "add-step-btn": "Add step"
+    },
+    "AddPage": {
+        "title": "Create an recipe",
+        "title-legend": "Title",
+        "title-placeholder": "Tomato salade",
+        "picture-legend": "Pick a file",
+        "picture-max-size": "Max size 2MB",
+        "description-legend": "Description",
+        "description-placeholder": "The fantastic tomato salade for the summer",
+        "create-btn": "Create"
     }
 }

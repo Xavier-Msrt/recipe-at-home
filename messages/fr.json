@@ -24,5 +24,15 @@
         "step": "Étape",
         "step-placeholder": "Coupez les tomates en 4 morceaux",
         "add-step-btn": "Ajouter une étape"
+    },
+    "AddPage": {
+        "title": "Créer une recette",
+        "title-legend": "Titre",
+        "title-placeholder": "Salade de tomates",
+        "picture-legend": "Choisissez un fichier",
+        "picture-max-size": "Taille maximale 2 Mo",
+        "description-legend": "Description",
+        "description-placeholder": "La fantastique salade de tomates pour l'été",
+        "create-btn": "Créer"
     }
 }
