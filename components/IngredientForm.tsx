@@ -9,7 +9,7 @@ export default function IngredientForm({
     ingredients: IngredientFormList;
     setIngredients: React.Dispatch<React.SetStateAction<IngredientFormList>>;
 }) {
-    const t = useTranslations('IngredientForm')
+    const t = useTranslations('IngredientForm');
 
     const handleAddIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -42,7 +42,9 @@ export default function IngredientForm({
                 return (
                     <div key={index} className="flex items-end gap-4">
                         <fieldset className="fieldset">
-                            <legend className="fieldset-legend">{t('name')}</legend>
+                            <legend className="fieldset-legend">
+                                {t('name')}
+                            </legend>
                             <input
                                 type="text"
                                 className="input validator"
@@ -81,7 +83,9 @@ export default function IngredientForm({
                         </fieldset>
 
                         <fieldset className="fieldset flex">
-                            <legend className="fieldset-legend">{t('unite')}</legend>
+                            <legend className="fieldset-legend">
+                                {t('unite')}
+                            </legend>
                             <input
                                 type="text"
                                 className="input validator"
