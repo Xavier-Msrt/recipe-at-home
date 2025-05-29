@@ -54,7 +54,7 @@ export default function StepForm({
 
                         <div className="flex items-start gap-2">
                             <textarea
-                                className="textarea w-full"
+                                className="textarea w-full validator"
                                 placeholder={t('step-placeholder')}
                                 value={step.description}
                                 onChange={(e) =>
