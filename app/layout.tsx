@@ -49,7 +49,7 @@ export default async function RootLayout({
                                 </div>
                             </nav>
                         </header>
-                        <main className="container mx-auto">{children}</main>
+                        <main className="container mx-auto pb-20">{children}</main>
                         <footer className="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4 fixed inset-x-0 bottom-0">
                             <aside>
                                 <p>
