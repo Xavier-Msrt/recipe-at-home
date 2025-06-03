@@ -26,7 +26,10 @@ export default async function RootLayout({
                         <header>
                             <nav className="navbar bg-base-100 shadow-sm">
                                 <div className="flex-1">
-                                    <Link className="btn btn-ghost text-xl" href="/">
+                                    <Link
+                                        className="btn btn-ghost text-xl"
+                                        href="/"
+                                    >
                                         {t('name')}
                                     </Link>
                                 </div>
@@ -49,7 +52,9 @@ export default async function RootLayout({
                                 </div>
                             </nav>
                         </header>
-                        <main className="container mx-auto pb-20">{children}</main>
+                        <main className="container mx-auto pb-20">
+                            {children}
+                        </main>
                         <footer className="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4 fixed inset-x-0 bottom-0">
                             <aside>
                                 <p>

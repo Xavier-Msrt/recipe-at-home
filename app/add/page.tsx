@@ -7,6 +7,8 @@ import { RecipeForm } from '@/types/Recipe';
 import { StepFormList } from '@/types/Step';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { createRecipe } from '../actions/createRecipe';
+import { redirect } from 'next/navigation';
 
 export default function Page() {
     const t = useTranslations('AddPage');
@@ -34,23 +36,59 @@ export default function Page() {
         setRecipe({ ...recipe, description: value });
     };
 
-        const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             setPicture(e.target.files[0]);
         }
     };
 
-    const handleCreate = (
+    const [errors, setErrors] = useState<Record<string, boolean>>({});
+
+    const handleCreate = async (
         e: React.MouseEvent<React.SetStateAction<HTMLButtonElement>>
     ) => {
         e.preventDefault();
-        // TODO
+        if (!picture) return;
+
+        const result = await createRecipe(recipe, ingredients, steps, picture);
+        if (!result.success) {
+            setErrors(result.errors || {});
+            return;
+        }
+
+        setErrors({});
+        redirect(`/${result.recipe?.id}`);
     };
 
     return (
         <div className="flex justify-center">
             <div>
                 <h1 className="text-center text-3xl my-8">{t('title')}</h1>
+                {Object.entries(errors).map(([key, value]) =>
+                    value ? (
+                        <div
+                            key={key}
+                            role="alert"
+                            className="alert alert-error my-2"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6 shrink-0 stroke-current"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                            </svg>
+                            <span>{t(`errors.${key}`)}</span>
+                        </div>
+                    ) : null
+                )}
+
                 <div className="card bg-base-100 shadow-sm p-10">
                     <form>
                         <fieldset className="fieldset">
@@ -83,7 +121,11 @@ export default function Page() {
                             <legend className="fieldset-legend">
                                 {t('picture-legend')}{' '}
                             </legend>
-                            <input type="file" className="file-input" onChange={handleFileChange}/>
+                            <input
+                                type="file"
+                                className="file-input"
+                                onChange={handleFileChange}
+                            />
                             <label className="label">
                                 {t('picture-max-size')}
                             </label>

@@ -33,6 +33,15 @@
         "picture-max-size": "Taille maximale 2 Mo",
         "description-legend": "Description",
         "description-placeholder": "La fantastique salade de tomates pour l'été",
-        "create-btn": "Créer"
+        "create-btn": "Créer",
+        "errors": {
+            "title": "Le titre est incorrect !",
+            "description": "La description est incorrecte !",
+            "ingredientsName": "Le nom de l'ingrédient est incorrect !",
+            "ingredientsQuantity": "La quantité de l'ingrédient est incorrecte !",
+            "stepDescription": "La description de l'étape est incorrecte !",
+            "picture": "Une image est requise.",
+            "pictureSize": "La taille de l’image est limitée à 3 Mo."
+        }
     }
 }

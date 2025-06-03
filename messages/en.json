@@ -33,6 +33,15 @@
         "picture-max-size": "Max size 2MB",
         "description-legend": "Description",
         "description-placeholder": "The fantastic tomato salade for the summer",
-        "create-btn": "Create"
+        "create-btn": "Create",
+        "errors": {
+            "title": "The title is incorrect!",
+            "description": "The description is incorrect!",
+            "ingredientsName": "The ingredient name is incorrect!",
+            "ingredientsQuantity": "The ingredient quantity is incorrect!",
+            "stepDescription": "The step description is incorrect!",
+            "picture": "A picture is required.",
+            "pictureSize": "The picture size must be under 3MB."
+        }
     }
 }
