@@ -20,7 +20,9 @@ export default async function Page({
         <>
             <SearchBar initialQuery={query} />
             <RecipeList recipes={recipes} />
-            <Pagination page={page} totalPages={totalPages} query={query} />
+            {total > 0 && (
+                <Pagination page={page} totalPages={totalPages} query={query} />
+            )}
         </>
     );
 }
