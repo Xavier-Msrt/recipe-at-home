@@ -13,8 +13,8 @@ model Recipe {
   title       String
   description String
   picture     String
-  Ingredient  Ingredient[]
-  Step        Step[]
+  ingredients Ingredient[]
+  steps       Step[]
 }
 
 model Ingredient {
