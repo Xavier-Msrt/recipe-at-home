@@ -61,9 +61,10 @@ export default function Page() {
     };
 
     return (
-        <div className="flex justify-center">
-            <div>
-                <h1 className="text-center text-3xl my-8">{t('title')}</h1>
+        <div className="flex justify-center mt-4 ">
+            <div className="card bg-base-100 shadow-sm py-6 px-8 ">
+                <h1 className="text-center text-3xl ">{t('title')}</h1>
+
                 {Object.entries(errors).map(([key, value]) =>
                     value ? (
                         <div
@@ -89,65 +90,56 @@ export default function Page() {
                     ) : null
                 )}
 
-                <div className="card bg-base-100 shadow-sm p-10">
-                    <form>
-                        <fieldset className="fieldset">
-                            <legend className="fieldset-legend">
-                                {t('title-legend')}
-                            </legend>
-                            <input
-                                type="text"
-                                className="input w-full validator"
-                                placeholder={t('title-placeholder')}
-                                value={recipe.title}
-                                onChange={(e) =>
-                                    handleTitleChange(e.target.value)
-                                }
-                                required
-                            />
-
-                            <legend className="fieldset-legend">
-                                {t('description-legend')}
-                            </legend>
-                            <textarea
-                                className="textarea w-full validator"
-                                placeholder={t('description-placeholder')}
-                                value={recipe.description}
-                                onChange={(e) =>
-                                    handleDescriptionChange(e.target.value)
-                                }
-                            ></textarea>
-
-                            <legend className="fieldset-legend">
-                                {t('picture-legend')}{' '}
-                            </legend>
-                            <input
-                                type="file"
-                                className="file-input"
-                                onChange={handleFileChange}
-                            />
-                            <label className="label">
-                                {t('picture-max-size')}
-                            </label>
-                        </fieldset>
-
-                        <IngredientForm
-                            ingredients={ingredients}
-                            setIngredients={setIngredients}
+                <form>
+                    <fieldset className="fieldset">
+                        <legend className="fieldset-legend">
+                            {t('title-legend')}
+                        </legend>
+                        <input
+                            type="text"
+                            className="input w-full validator"
+                            placeholder={t('title-placeholder')}
+                            value={recipe.title}
+                            onChange={(e) => handleTitleChange(e.target.value)}
+                            required
                         />
 
-                        <StepFrom steps={steps} setSteps={setSteps} />
+                        <legend className="fieldset-legend">
+                            {t('description-legend')}
+                        </legend>
+                        <textarea
+                            className="textarea w-full validator"
+                            placeholder={t('description-placeholder')}
+                            value={recipe.description}
+                            onChange={(e) =>
+                                handleDescriptionChange(e.target.value)
+                            }
+                        ></textarea>
 
-                        <div className="flex justify-center">
-                            <button
-                                className="btn btn-wide"
-                                onClick={handleCreate}
-                            >
-                                {t('create-btn')}
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                        <legend className="fieldset-legend">
+                            {t('picture-legend')}{' '}
+                        </legend>
+                        <input
+                            type="file"
+                            className="file-input"
+                            onChange={handleFileChange}
+                        />
+                        <label className="label">{t('picture-max-size')}</label>
+                    </fieldset>
+
+                    <IngredientForm
+                        ingredients={ingredients}
+                        setIngredients={setIngredients}
+                    />
+
+                    <StepFrom steps={steps} setSteps={setSteps} />
+
+                    <div className="flex justify-center">
+                        <button className="btn btn-wide" onClick={handleCreate}>
+                            {t('create-btn')}
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     );

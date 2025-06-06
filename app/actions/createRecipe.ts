@@ -77,9 +77,22 @@ export async function createRecipe(
     const extension = picture.name.split('.').pop();
     const fileName = uuidv4() + '.' + extension;
 
-    await minioClient.putObject('recipes', fileName, buffer, buffer.length, {
-        'Content-Type': picture.type,
-    });
+    const exists = await minioClient.bucketExists(
+        process.env.MINIO_BUCKET as string
+    );
+    if (!exists) {
+        await minioClient.makeBucket(process.env.MINIO_BUCKET as string);
+    }
+
+    await minioClient.putObject(
+        process.env.MINIO_BUCKET,
+        fileName,
+        buffer,
+        buffer.length,
+        {
+            'Content-Type': picture.type,
+        }
+    );
 
     const recipeCreated = await prisma.$transaction(async (tr) => {
         const currentRecipe = await tr.recipe.create({

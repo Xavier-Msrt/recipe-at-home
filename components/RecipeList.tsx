@@ -14,7 +14,11 @@ export default function RecipeList({ recipes }: { recipes: Recipe[] }) {
     };
 
     if (recipes.length === 0) {
-        return <p className='flex justify-center font-bold text-2xl'>{t('empty-list')}</p>;
+        return (
+            <p className="flex justify-center font-bold text-2xl">
+                {t('empty-list')}
+            </p>
+        );
     }
 
     return (

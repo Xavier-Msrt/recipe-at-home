@@ -6,8 +6,18 @@ const nextConfig: NextConfig = {
     output: 'standalone',
     experimental: {
         serverActions: {
-            bodySizeLimit: '3mb',
+            bodySizeLimit: '2mb',
         },
+    },
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'http',
+                hostname: process.env.MINIO_ENDPOINT as string,
+                port: process.env.MINIO_PORT,
+                pathname: `/${process.env.MINIO_BUCKET}/**`,
+            },
+        ],
     },
 };
 
