@@ -85,7 +85,7 @@ export async function createRecipe(
     }
 
     await minioClient.putObject(
-        process.env.MINIO_BUCKET,
+        process.env.MINIO_BUCKET as string,
         fileName,
         buffer,
         buffer.length,

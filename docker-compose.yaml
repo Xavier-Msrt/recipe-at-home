@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    # network_mode: host
+    container_name: nextjs_app
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@172.17.0.1:5432/postgres?schema=recipeathome
+      - MINIO_ENDPOINT=172.17.0.1
+      - MINIO_PORT=9000
+      - MINIO_ACCESS_KEY=minioadmin
+      - MINIO_SECRET_KEY=minioadmin
+      - MINIO_BUCKET=recipes
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+    command: ["pnpm", "dev"]
+
